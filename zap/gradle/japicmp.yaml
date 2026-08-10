@@ -1,6 +1,12 @@
 # Exclusions for japicmp.
 #
 # Any binary incompatible changes deemed acceptable should be added to this file.
+#
+# IMPORTANT: org.zaproxy.zap.network is intentionally NOT excluded here.
+# The public API surface of HttpSenderImpl and related types in that package
+# is tracked by docs/network-api-baseline.xml as the regression gate for the
+# HttpSenderImpl interface contract migration. Every change to a public type in
+# org.zaproxy.zap.network must be verified with zero new breaking changes.
 ---
 packageExcludes:
  - "ch.csnc.extension.httpclient"
