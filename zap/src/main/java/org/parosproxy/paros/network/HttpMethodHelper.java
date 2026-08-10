@@ -44,6 +44,7 @@ import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -155,7 +156,7 @@ public class HttpMethodHelper {
             // ZAP: avoid discarding HTTP status code 101 that is used for WebSocket upgrade
             httpMethod = new org.zaproxy.zap.ZapGetMethod();
         } else if (method.equalsIgnoreCase(POST)) {
-            httpMethod = new org.zaproxy.zap.network.ZapPostMethod();
+            httpMethod = new PostMethod();
         } else if (method.equalsIgnoreCase(DELETE)) {
             httpMethod = new org.zaproxy.zap.network.ZapDeleteMethod();
         } else if (method.equalsIgnoreCase(PUT)) {
