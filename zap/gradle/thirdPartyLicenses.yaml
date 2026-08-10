@@ -9,7 +9,6 @@ licenses:
   commons-codec:commons-codec: "Apache 2.0"
   commons-collections:commons-collections: "Apache 2.0"
   commons-configuration:commons-configuration: "Apache 2.0"
-  commons-httpclient:commons-httpclient: "Apache 2.0"
   commons-io:commons-io: "Apache 2.0"
   commons-lang:commons-lang: "Apache 2.0"
   commons-logging:commons-logging: "Apache 2.0"

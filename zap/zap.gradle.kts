@@ -96,7 +96,6 @@ dependencies {
     implementation(libs.commons.codec)
     api(libs.commons.collections)
     api(libs.commons.configuration)
-    api(libs.commons.httpclient)
     api(libs.commons.io)
     api(libs.commons.lang)
     api(libs.commons.lang3)
