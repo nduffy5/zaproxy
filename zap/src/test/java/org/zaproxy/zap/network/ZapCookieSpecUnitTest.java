@@ -22,12 +22,11 @@ package org.zaproxy.zap.network;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.cookie.CookieSpec;
-import org.apache.commons.httpclient.cookie.MalformedCookieException;
+import java.net.HttpCookie;
 import org.junit.jupiter.api.Test;
 
 /** Unit test for {@link ZapCookieSpec}. */
+@SuppressWarnings("deprecation")
 class ZapCookieSpecUnitTest {
 
     private static final String HOST = "example.com";
@@ -36,54 +35,54 @@ class ZapCookieSpecUnitTest {
     private static final boolean SECURE = true;
 
     @Test
-    void shouldThrowWhenValidatingWithNullHost() throws MalformedCookieException {
+    void shouldThrowWhenValidatingWithNullHost() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
+        ZapCookieSpec cookieSpec = createCookieSpec();
         String host = null;
         // When / Then
         assertThrows(
                 IllegalArgumentException.class,
-                () -> cookieSpec.validate(host, PORT, PATH, SECURE, new Cookie()));
+                () -> cookieSpec.validate(host, PORT, PATH, SECURE, new HttpCookie("n", "v")));
     }
 
     @Test
-    void shouldThrowWhenValidatingWithEmptyHost() throws MalformedCookieException {
+    void shouldThrowWhenValidatingWithEmptyHost() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
+        ZapCookieSpec cookieSpec = createCookieSpec();
         String host = "";
         // When / Then
         assertThrows(
                 IllegalArgumentException.class,
-                () -> cookieSpec.validate(host, PORT, PATH, SECURE, new Cookie()));
+                () -> cookieSpec.validate(host, PORT, PATH, SECURE, new HttpCookie("n", "v")));
     }
 
     @Test
-    void shouldThrowWhenValidatingWithNegativePort() throws MalformedCookieException {
+    void shouldThrowWhenValidatingWithNegativePort() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
+        ZapCookieSpec cookieSpec = createCookieSpec();
         int port = -1;
         // When / Then
         assertThrows(
                 IllegalArgumentException.class,
-                () -> cookieSpec.validate(HOST, port, PATH, SECURE, new Cookie()));
+                () -> cookieSpec.validate(HOST, port, PATH, SECURE, new HttpCookie("n", "v")));
     }
 
     @Test
-    void shouldThrowWhenValidatingWithNullPath() throws MalformedCookieException {
+    void shouldThrowWhenValidatingWithNullPath() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
+        ZapCookieSpec cookieSpec = createCookieSpec();
         String path = null;
         // When / Then
         assertThrows(
                 IllegalArgumentException.class,
-                () -> cookieSpec.validate(HOST, PORT, path, SECURE, new Cookie()));
+                () -> cookieSpec.validate(HOST, PORT, path, SECURE, new HttpCookie("n", "v")));
     }
 
     @Test
-    void shouldThrowWhenValidatingWithNullCookie() throws MalformedCookieException {
+    void shouldThrowWhenValidatingWithNullCookie() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = null;
+        ZapCookieSpec cookieSpec = createCookieSpec();
+        HttpCookie cookie = null;
         // When / Then
         assertThrows(
                 NullPointerException.class,
@@ -91,41 +90,17 @@ class ZapCookieSpecUnitTest {
     }
 
     @Test
-    void shouldThrowWhenValidatingWithNullCookieDomain() throws MalformedCookieException {
+    void shouldBeValidEvenIfCookiePathIsDifferentThanOrigin() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = new Cookie(null, "name", "value");
-        // When / Then
-        assertThrows(
-                NullPointerException.class,
-                () -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
-    }
-
-    @Test
-    void shouldBeMalformedWhenValidatingWithNegativeCookieVersion()
-            throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = new Cookie(HOST, "name", "value");
-        cookie.setVersion(-1);
-        // When / Then
-        assertThrows(
-                MalformedCookieException.class,
-                () -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
-    }
-
-    @Test
-    void shouldBeValidEvenIfCookiePathIsDifferentThanOrigin() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = new Cookie(HOST, "name", "value");
+        ZapCookieSpec cookieSpec = createCookieSpec();
+        HttpCookie cookie = new HttpCookie("name", "value");
         cookie.setPath("/other/path/");
+        cookie.setDomain(HOST);
         // When / Then
         assertDoesNotThrow(() -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
     }
 
-    @SuppressWarnings("deprecation")
-    private static CookieSpec createCookieSpec() {
+    private static ZapCookieSpec createCookieSpec() {
         return new ZapCookieSpec();
     }
 }

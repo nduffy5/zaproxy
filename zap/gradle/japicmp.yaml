@@ -17,6 +17,7 @@ classExcludes:
  - "org.parosproxy.paros.extension.option.OptionsCertificatePanel"
  - "org.parosproxy.paros.extension.option.OptionsParamCertificate"
  - "org.parosproxy.paros.network.SSLConnector"
+ - "org.zaproxy.zap.network.ZapCookieSpec"
 methodExcludes:
  - "org.parosproxy.paros.model.OptionsParam#getCertificateParam()"
  - "org.parosproxy.paros.model.OptionsParam#getExperimentalFeaturesParam()"
