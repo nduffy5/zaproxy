@@ -155,7 +155,7 @@ public class HttpMethodHelper {
             // ZAP: avoid discarding HTTP status code 101 that is used for WebSocket upgrade
             httpMethod = new org.zaproxy.zap.ZapGetMethod();
         } else if (method.equalsIgnoreCase(POST)) {
-            httpMethod = new org.zaproxy.zap.network.ZapPostMethod();
+            httpMethod = new GenericMethod(POST);
         } else if (method.equalsIgnoreCase(DELETE)) {
             httpMethod = new org.zaproxy.zap.network.ZapDeleteMethod();
         } else if (method.equalsIgnoreCase(PUT)) {

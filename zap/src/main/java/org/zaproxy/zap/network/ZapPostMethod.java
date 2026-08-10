@@ -19,47 +19,74 @@
  */
 package org.zaproxy.zap.network;
 
-import java.io.IOException;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.methods.PostMethod;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.nio.charset.StandardCharsets;
 
 /**
- * An HTTP POST method implementation that ignores malformed HTTP response header lines.
+ * An HTTP POST method implementation backed by {@link HttpRequest.Builder}.
  *
- * @see PostMethod
+ * <p>Supports URL-encoded string bodies via {@link #setStringBody(String)} and binary bodies via
+ * {@link #setByteArrayBody(byte[])}.
+ *
  * @deprecated (2.12.0) Implementation details, do not use.
  */
 @Deprecated
-public class ZapPostMethod extends PostMethod {
+public class ZapPostMethod {
 
+    private String uri;
+    private HttpRequest.BodyPublisher bodyPublisher;
+
+    /** Creates a new {@code ZapPostMethod} with no URI set. */
     public ZapPostMethod() {
-        super();
-    }
-
-    public ZapPostMethod(String uri) {
-        super(uri);
+        this.bodyPublisher = HttpRequest.BodyPublishers.noBody();
     }
 
     /**
-     * {@inheritDoc}
+     * Creates a new {@code ZapPostMethod} with the given URI.
      *
-     * <p><strong>Note:</strong> Malformed HTTP header lines are ignored (instead of throwing an
-     * exception).
+     * @param uri the URI for the POST request
      */
-    /*
-     * Implementation copied from HttpMethodBase#readResponseHeaders(HttpState, HttpConnection) but changed to use a custom
-     * header parser (ZapHttpParser#parseHeaders(InputStream, String)).
-     */
-    @Override
-    protected void readResponseHeaders(
-            HttpState state, org.apache.commons.httpclient.HttpConnection conn) throws IOException {
-        getResponseHeaderGroup().clear();
+    public ZapPostMethod(String uri) {
+        this.uri = uri;
+        this.bodyPublisher = HttpRequest.BodyPublishers.noBody();
+    }
 
-        Header[] headers =
-                ZapHttpParser.parseHeaders(
-                        conn.getResponseInputStream(), getParams().getHttpElementCharset());
-        // Wire logging moved to HttpParser
-        getResponseHeaderGroup().setHeaders(headers);
+    /**
+     * Sets the URI for this POST request.
+     *
+     * @param uri the URI string
+     */
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    /**
+     * Sets a URL-encoded string body for this POST request. Uses {@link
+     * HttpRequest.BodyPublishers#ofString(String)} internally.
+     *
+     * @param body the URL-encoded body string
+     */
+    public void setStringBody(String body) {
+        this.bodyPublisher = HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Sets a binary body for this POST request. Uses {@link
+     * HttpRequest.BodyPublishers#ofByteArray(byte[])} internally.
+     *
+     * @param body the binary body bytes
+     */
+    public void setByteArrayBody(byte[] body) {
+        this.bodyPublisher = HttpRequest.BodyPublishers.ofByteArray(body);
+    }
+
+    /**
+     * Builds and returns an {@link HttpRequest} with method POST and the configured body.
+     *
+     * @return the built {@link HttpRequest}
+     */
+    public HttpRequest buildRequest() {
+        return HttpRequest.newBuilder().uri(URI.create(uri)).method("POST", bodyPublisher).build();
     }
 }
