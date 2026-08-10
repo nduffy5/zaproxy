@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  japicmp API baseline for org.zaproxy.zap.network (and related public types).
+
+  Generated against: org.zaproxy:zap:2.17.0 (old) vs current HEAD (new).
+  Purpose: Machine-verifiable regression gate for the HttpSenderImpl interface contract.
+
+  Zero breaking changes recorded at baseline capture (HEAD = 2.18.0-SNAPSHOT).
+  Every subsequent change to a public type in org.zaproxy.zap.network must re-run
+  './gradlew :zap:japicmp' and confirm zero new breaking changes before the step
+  is considered complete.
+-->
+<japicmp
+    newJar="zap-2.18.0-SNAPSHOT.jar"
+    oldJar="zap-2.17.0.jar"
+    accessModifier="PUBLIC"
+    onlyModifications="false"
+    onlyBinaryIncompatibleModifications="false"
+    ignoreMissingClasses="true"
+    semanticVersioning="N/A">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       org.zaproxy.zap.network — public API surface (baseline)
+       ═══════════════════════════════════════════════════════════════════ -->
+
+  <class
+      name="org.zaproxy.zap.network.HttpSenderImpl"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="true">
+    <methods>
+      <method name="isGlobalStateEnabled" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false"/>
+      <method name="addListener" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.zaproxy.zap.network.HttpSenderListener"/>
+        </parameters>
+      </method>
+      <method name="removeListener" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.zaproxy.zap.network.HttpSenderListener"/>
+        </parameters>
+      </method>
+      <method name="createContext" returnType="org.zaproxy.zap.network.HttpSenderContext"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpSender"/>
+          <parameter type="int"/>
+        </parameters>
+      </method>
+      <method name="getContext" returnType="org.zaproxy.zap.network.HttpSenderContext"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false" isDefault="true">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpSender"/>
+        </parameters>
+      </method>
+      <method name="sendAndReceive" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false" isDefault="true">
+        <parameters>
+          <parameter type="org.zaproxy.zap.network.HttpSenderContext"/>
+          <parameter type="org.zaproxy.zap.network.HttpRequestConfig"/>
+          <parameter type="org.parosproxy.paros.network.HttpMessage"/>
+          <parameter type="java.nio.file.Path"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+      <method name="sendAndReceive" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false" isDefault="true">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpSender"/>
+          <parameter type="org.zaproxy.zap.network.HttpRequestConfig"/>
+          <parameter type="org.parosproxy.paros.network.HttpMessage"/>
+          <parameter type="java.nio.file.Path"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+      <method name="saveState" returnType="java.lang.Object"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false" isDefault="true"/>
+      <method name="restoreState" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false" isDefault="true">
+        <parameters>
+          <parameter type="java.lang.Object"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpSenderContext"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="true">
+    <methods>
+      <method name="setUseGlobalState" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="boolean"/>
+        </parameters>
+      </method>
+      <method name="setUseCookies" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="boolean"/>
+        </parameters>
+      </method>
+      <method name="setFollowRedirects" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="boolean"/>
+        </parameters>
+      </method>
+      <method name="setMaxRedirects" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="int"/>
+        </parameters>
+      </method>
+      <method name="setMaxRetriesOnIoError" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="int"/>
+        </parameters>
+      </method>
+      <method name="setRemoveUserDefinedAuthHeaders" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="boolean"/>
+        </parameters>
+      </method>
+      <method name="setUser" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.zaproxy.zap.users.User"/>
+        </parameters>
+      </method>
+      <method name="getUser" returnType="org.zaproxy.zap.users.User"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpMessage"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpSenderListener"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="true">
+    <methods>
+      <method name="getListenerOrder" returnType="int"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false"/>
+      <method name="onHttpRequestSend" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpMessage"/>
+          <parameter type="int"/>
+          <parameter type="org.parosproxy.paros.network.HttpSender"/>
+        </parameters>
+      </method>
+      <method name="onHttpResponseReceive" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpMessage"/>
+          <parameter type="int"/>
+          <parameter type="org.parosproxy.paros.network.HttpSender"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpRequestConfig"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <fields>
+      <field name="NO_VALUE_SET" type="int"
+             changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+             isStatic="true" isFinal="true"/>
+    </fields>
+    <methods>
+      <method name="isFollowRedirects" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="getRedirectionValidator" returnType="org.zaproxy.zap.network.HttpRedirectionValidator"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="isNotifyListeners" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="getSoTimeout" returnType="int"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="builder" returnType="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="true"/>
+      <method name="builder" returnType="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="true">
+        <parameters>
+          <parameter type="org.zaproxy.zap.network.HttpRequestConfig"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <methods>
+      <method name="setFollowRedirects" returnType="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="boolean"/>
+        </parameters>
+      </method>
+      <method name="setRedirectionValidator" returnType="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="org.zaproxy.zap.network.HttpRedirectionValidator"/>
+        </parameters>
+      </method>
+      <method name="setNotifyListeners" returnType="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="boolean"/>
+        </parameters>
+      </method>
+      <method name="setSoTimeout" returnType="org.zaproxy.zap.network.HttpRequestConfig.Builder"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="int"/>
+        </parameters>
+      </method>
+      <method name="build" returnType="org.zaproxy.zap.network.HttpRequestConfig"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpRedirectionValidator"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="true">
+    <methods>
+      <method name="isValid" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="org.apache.commons.httpclient.URI"/>
+        </parameters>
+      </method>
+      <method name="notifyMessageReceived" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false" isDefault="true">
+        <parameters>
+          <parameter type="org.parosproxy.paros.network.HttpMessage"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.DefaultHttpRedirectionValidator"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <fields>
+      <field name="INSTANCE" type="org.zaproxy.zap.network.DefaultHttpRedirectionValidator"
+             changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+             isStatic="true" isFinal="true"/>
+    </fields>
+    <methods>
+      <method name="isValid" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="org.apache.commons.httpclient.URI"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.DomainMatcher"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <methods>
+      <method name="getValue" returnType="java.lang.String"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="isRegex" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="matches" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="java.lang.String"/>
+        </parameters>
+      </method>
+      <method name="createPattern" returnType="java.util.regex.Pattern"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="true">
+        <parameters>
+          <parameter type="java.lang.String"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpEncoding"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="true">
+    <methods>
+      <method name="encode" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+      <method name="decode" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="true" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpEncodingGzip"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <methods>
+      <method name="getSingleton" returnType="org.zaproxy.zap.network.HttpEncodingGzip"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="true"/>
+      <method name="encode" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+      <method name="decode" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpEncodingDeflate"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <methods>
+      <method name="getSingleton" returnType="org.zaproxy.zap.network.HttpEncodingDeflate"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="true"/>
+      <method name="encode" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+      <method name="decode" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+        <exceptions>
+          <exception type="java.io.IOException"/>
+        </exceptions>
+      </method>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpRequestBody"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <methods>
+      <method name="getBody" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="setBody" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+      </method>
+      <method name="length" returnType="int"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.HttpResponseBody"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false">
+    <methods>
+      <method name="getBody" returnType="byte[]"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="setBody" returnType="void"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false">
+        <parameters>
+          <parameter type="byte[]"/>
+        </parameters>
+      </method>
+      <method name="length" returnType="int"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.SocksProxy"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false"
+      isDeprecated="true">
+    <methods>
+      <method name="getHost" returnType="java.lang.String"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="getPort" returnType="int"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="getVersion" returnType="org.zaproxy.zap.network.SocksProxy.Version"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="isUseDns" returnType="boolean"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+    </methods>
+  </class>
+
+  <class
+      name="org.zaproxy.zap.network.SocksProxy.Version"
+      changeStatus="UNCHANGED"
+      binaryCompatible="true"
+      sourceCompatible="true"
+      isInterface="false"
+      isEnum="true"
+      isDeprecated="true">
+    <fields>
+      <field name="SOCKS4a" type="org.zaproxy.zap.network.SocksProxy.Version"
+             changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+             isStatic="true" isFinal="true"/>
+      <field name="SOCKS5" type="org.zaproxy.zap.network.SocksProxy.Version"
+             changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+             isStatic="true" isFinal="true"/>
+    </fields>
+    <methods>
+      <method name="number" returnType="int"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="false"/>
+      <method name="from" returnType="org.zaproxy.zap.network.SocksProxy.Version"
+              changeStatus="UNCHANGED" binaryCompatible="true" sourceCompatible="true"
+              isAbstract="false" isStatic="true">
+        <parameters>
+          <parameter type="java.lang.String"/>
+        </parameters>
+      </method>
+    </methods>
+  </class>
+
+</japicmp>
