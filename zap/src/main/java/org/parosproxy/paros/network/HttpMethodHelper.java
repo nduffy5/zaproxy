@@ -157,7 +157,7 @@ public class HttpMethodHelper {
         } else if (method.equalsIgnoreCase(POST)) {
             httpMethod = new org.zaproxy.zap.network.ZapPostMethod();
         } else if (method.equalsIgnoreCase(DELETE)) {
-            httpMethod = new org.zaproxy.zap.network.ZapDeleteMethod();
+            httpMethod = new GenericMethod(DELETE);
         } else if (method.equalsIgnoreCase(PUT)) {
             httpMethod = new org.zaproxy.zap.network.ZapPutMethod();
         } else if (method.equalsIgnoreCase(HEAD)) {

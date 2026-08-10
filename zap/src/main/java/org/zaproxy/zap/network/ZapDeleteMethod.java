@@ -19,59 +19,54 @@
  */
 package org.zaproxy.zap.network;
 
-import java.io.IOException;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.methods.DeleteMethod;
-import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
+import java.net.URI;
+import java.net.http.HttpRequest;
 
 /**
- * An HTTP DELETE method implementation that ignores malformed HTTP response header lines.
+ * An HTTP DELETE method implementation backed by {@link java.net.http.HttpRequest.Builder}.
  *
- * @see DeleteMethod
  * @deprecated (2.12.0) Implementation details, do not use.
  */
 @Deprecated
-public class ZapDeleteMethod extends EntityEnclosingMethod {
+public class ZapDeleteMethod {
 
+    private final HttpRequest.Builder builder;
+
+    /** Creates a new {@code ZapDeleteMethod} with no URI set. */
     public ZapDeleteMethod() {
-        super();
+        this.builder =
+                HttpRequest.newBuilder().method("DELETE", HttpRequest.BodyPublishers.noBody());
     }
 
+    /**
+     * Creates a new {@code ZapDeleteMethod} with the given URI.
+     *
+     * @param uri the request URI
+     */
     public ZapDeleteMethod(String uri) {
-        super(uri);
+        this.builder =
+                HttpRequest.newBuilder(URI.create(uri))
+                        .method("DELETE", HttpRequest.BodyPublishers.noBody());
     }
 
     /**
      * Returns {@code DELETE}.
      *
      * @return {@code DELETE}
-     * @since 2.0
      */
-    @Override
     public String getName() {
         return "DELETE";
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@link HttpRequest.Builder} configured for this DELETE request.
      *
-     * <p><strong>Note:</strong> Malformed HTTP header lines are ignored (instead of throwing an
-     * exception).
+     * <p>The builder can be further customised (e.g. to add headers or a request body) before
+     * calling {@link HttpRequest.Builder#build()}.
+     *
+     * @return the underlying {@code HttpRequest.Builder}
      */
-    /*
-     * Implementation copied from HttpMethodBase#readResponseHeaders(HttpState, HttpConnection) but changed to use a custom
-     * header parser (ZapHttpParser#parseHeaders(InputStream, String)).
-     */
-    @Override
-    protected void readResponseHeaders(
-            HttpState state, org.apache.commons.httpclient.HttpConnection conn) throws IOException {
-        getResponseHeaderGroup().clear();
-
-        Header[] headers =
-                ZapHttpParser.parseHeaders(
-                        conn.getResponseInputStream(), getParams().getHttpElementCharset());
-        // Wire logging moved to HttpParser
-        getResponseHeaderGroup().setHeaders(headers);
+    public HttpRequest.Builder getBuilder() {
+        return builder;
     }
 }
