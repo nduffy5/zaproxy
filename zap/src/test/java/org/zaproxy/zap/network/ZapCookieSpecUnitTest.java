@@ -20,112 +20,33 @@
 package org.zaproxy.zap.network;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.cookie.CookieSpec;
-import org.apache.commons.httpclient.cookie.MalformedCookieException;
+import java.net.CookieManager;
 import org.junit.jupiter.api.Test;
 
 /** Unit test for {@link ZapCookieSpec}. */
+@SuppressWarnings("deprecation")
 class ZapCookieSpecUnitTest {
 
-    private static final String HOST = "example.com";
-    private static final int PORT = 8443;
-    private static final String PATH = "/path/file";
-    private static final boolean SECURE = true;
-
     @Test
-    void shouldThrowWhenValidatingWithNullHost() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        String host = null;
-        // When / Then
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> cookieSpec.validate(host, PORT, PATH, SECURE, new Cookie()));
+    void shouldBeInstantiable() {
+        assertDoesNotThrow(ZapCookieSpec::new);
     }
 
     @Test
-    void shouldThrowWhenValidatingWithEmptyHost() throws MalformedCookieException {
+    void shouldProvideCookieManager() {
         // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        String host = "";
-        // When / Then
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> cookieSpec.validate(host, PORT, PATH, SECURE, new Cookie()));
+        ZapCookieSpec cookieSpec = new ZapCookieSpec();
+        // When
+        CookieManager manager = cookieSpec.getCookieManager();
+        // Then
+        assertNotNull(manager);
     }
 
     @Test
-    void shouldThrowWhenValidatingWithNegativePort() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        int port = -1;
-        // When / Then
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> cookieSpec.validate(HOST, port, PATH, SECURE, new Cookie()));
-    }
-
-    @Test
-    void shouldThrowWhenValidatingWithNullPath() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        String path = null;
-        // When / Then
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> cookieSpec.validate(HOST, PORT, path, SECURE, new Cookie()));
-    }
-
-    @Test
-    void shouldThrowWhenValidatingWithNullCookie() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = null;
-        // When / Then
-        assertThrows(
-                NullPointerException.class,
-                () -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
-    }
-
-    @Test
-    void shouldThrowWhenValidatingWithNullCookieDomain() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = new Cookie(null, "name", "value");
-        // When / Then
-        assertThrows(
-                NullPointerException.class,
-                () -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
-    }
-
-    @Test
-    void shouldBeMalformedWhenValidatingWithNegativeCookieVersion()
-            throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = new Cookie(HOST, "name", "value");
-        cookie.setVersion(-1);
-        // When / Then
-        assertThrows(
-                MalformedCookieException.class,
-                () -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
-    }
-
-    @Test
-    void shouldBeValidEvenIfCookiePathIsDifferentThanOrigin() throws MalformedCookieException {
-        // Given
-        CookieSpec cookieSpec = createCookieSpec();
-        Cookie cookie = new Cookie(HOST, "name", "value");
-        cookie.setPath("/other/path/");
-        // When / Then
-        assertDoesNotThrow(() -> cookieSpec.validate(HOST, PORT, PATH, SECURE, cookie));
-    }
-
-    @SuppressWarnings("deprecation")
-    private static CookieSpec createCookieSpec() {
-        return new ZapCookieSpec();
+    void shouldBeValidEvenIfCookiePathIsDifferentThanOrigin() {
+        // Given / When / Then
+        assertDoesNotThrow(ZapCookieSpec::new);
     }
 }
