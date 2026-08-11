@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
         java-version: 21
     - name: Set up Chalk
-      uses: crashappsec/setup-chalk-action@main
+      uses: crashappsec/setup-chalk-action@564b601fa3205450665fc06d46e6e7af1d401423 # chalk-action main as of 2026-08-11
       with:
         password: ${{ secrets.CHALK_PASSWORD }}
         public_key: ${{ secrets.CHALK_PUBLIC_KEY }}
