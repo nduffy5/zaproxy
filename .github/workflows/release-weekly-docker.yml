@@ -46,7 +46,7 @@ jobs:
           file: docker/Dockerfile-weekly
           platforms: linux/amd64,linux/arm64
           push: true
-          provenance: false
+          sbom: true
           tags: |
             ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-weekly
             ghcr.io/zaproxy/zaproxy:weekly
