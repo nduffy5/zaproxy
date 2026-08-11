@@ -68,19 +68,22 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
 	x11vnc && \
 	rm -rf /var/lib/apt/lists/*
 
+RUN useradd -u 1000 -d /home/zap -m -s /bin/bash zap
+RUN echo zap:zap | chpasswd
+RUN mkdir /zap && chown zap:zap /zap
+
+COPY --link requirements.txt /tmp/requirements.txt
 RUN pip3 install \
 	--break-system-packages \
 	--no-cache-dir \
 	--upgrade \
 	awscli \
 	pip \
-	zaproxy \
-	pyyaml \
-	urllib3
-
-RUN useradd -u 1000 -d /home/zap -m -s /bin/bash zap
-RUN echo zap:zap | chpasswd
-RUN mkdir /zap && chown zap:zap /zap
+	urllib3 && \
+    pip3 install \
+	--break-system-packages \
+	--no-cache-dir \
+	-r /tmp/requirements.txt
 
 WORKDIR /zap
 
