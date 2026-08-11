@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 zaproxy/zap-nightly:latest
+FROM --platform=linux/amd64 zaproxy/zap-nightly@sha256:42b0da85583712ed32529c5a624e814c6653058ffb06ce3be4a539fa7aef57d3 # pinned 2026-08-11
 
 USER root
 
