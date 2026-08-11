@@ -46,7 +46,6 @@ jobs:
           file: docker/Dockerfile-live
           platforms: linux/amd64,linux/arm64
           push: true
-          provenance: false
           tags: |
             ghcr.io/zaproxy/zaproxy:nightly
             zaproxy/zap-nightly:latest
@@ -56,6 +55,7 @@ jobs:
             index:org.opencontainers.image.source=https://github.com/zaproxy/zaproxy
             index:org.opencontainers.image.description=The nightly Docker image for the world's most widely used web app scanner.
             index:org.opencontainers.image.licenses=Apache-2.0
+          sbom: true
       - name: "Publicise the release"
         uses: myConsciousness/bluesky-post@2d132869a6a51dea18183a26984a09f67744417e # v6.0.1
         if: ${{ ! cancelled() }}
