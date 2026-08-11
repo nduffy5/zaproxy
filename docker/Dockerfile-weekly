@@ -58,7 +58,8 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
     mkdir /zap  && \
     chown zap:zap /zap
 
-RUN pip install --break-system-packages --no-cache-dir --upgrade awscli zaproxy pyyaml requests urllib3 
+COPY --link --chown=0:0 requirements.lock requirements.lock
+RUN pip install --require-hashes --break-system-packages --no-cache-dir -r requirements.lock
 
 WORKDIR /zap
 
