@@ -74,15 +74,18 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
 	mkdir /zap  && \
 	chown zap:zap /zap
 
+COPY --link requirements.txt /tmp/requirements.txt
 RUN pip install \
 	--break-system-packages \
 	--no-cache-dir \
 	--upgrade \
 	awscli \
-	zaproxy \
-	pyyaml \
 	requests \
-	urllib3
+	urllib3 && \
+    pip install \
+	--break-system-packages \
+	--no-cache-dir \
+	-r /tmp/requirements.txt
 
 #Change to the zap user so things get done as the right person (apart from copy)
 USER zap
