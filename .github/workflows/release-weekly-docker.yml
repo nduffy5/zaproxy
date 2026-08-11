@@ -14,7 +14,7 @@ jobs:
           echo "REL_DATE=$(date +%F)" >> $GITHUB_ENV
           echo "REL_DATE_SHORT=$(date +%Y%m%d)" >> $GITHUB_ENV
       - name: Set up Chalk
-        uses: crashappsec/setup-chalk-action@main
+        uses: crashappsec/setup-chalk-action@564b601fa3205450665fc06d46e6e7af1d401423 # main
         with:
           password: ${{ secrets.CHALK_PASSWORD }}
           public_key: ${{ secrets.CHALK_PUBLIC_KEY }}
@@ -56,5 +56,5 @@ jobs:
             webswing_url=${{ secrets.WEBSWING_URL }}
           annotations: |
             index:org.opencontainers.image.source=https://github.com/zaproxy/zaproxy
-            index:org.opencontainers.image.description=The weekly Docker image for the world’s most widely used web app scanner.
+            index:org.opencontainers.image.description=The weekly Docker image for the world's most widely used web app scanner.
             index:org.opencontainers.image.licenses=Apache-2.0
