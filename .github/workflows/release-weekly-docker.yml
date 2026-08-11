@@ -46,7 +46,7 @@ jobs:
           file: docker/Dockerfile-weekly
           platforms: linux/amd64,linux/arm64
           push: true
-          provenance: false
+          sbom: true
           tags: |
             ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-weekly
             ghcr.io/zaproxy/zaproxy:weekly
@@ -56,5 +56,5 @@ jobs:
             webswing_url=${{ secrets.WEBSWING_URL }}
           annotations: |
             index:org.opencontainers.image.source=https://github.com/zaproxy/zaproxy
-            index:org.opencontainers.image.description=The weekly Docker image for the world’s most widely used web app scanner.
+            index:org.opencontainers.image.description=The weekly Docker image for the world's most widely used web app scanner.
             index:org.opencontainers.image.licenses=Apache-2.0
