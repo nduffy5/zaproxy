@@ -49,7 +49,7 @@ jobs:
           file: docker/Dockerfile-stable
           platforms: linux/amd64,linux/arm64
           push: true
-          provenance: false
+          sbom: true
           tags: |
             ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-stable
             ghcr.io/zaproxy/zaproxy:${{ env.REL_VERSION }}
@@ -62,7 +62,7 @@ jobs:
             webswing_url=${{ secrets.WEBSWING_URL }}
           annotations: |
             index:org.opencontainers.image.source=https://github.com/zaproxy/zaproxy
-            index:org.opencontainers.image.description=The stable Docker image for the world’s most widely used web app scanner.
+            index:org.opencontainers.image.description=The stable Docker image for the world's most widely used web app scanner.
             index:org.opencontainers.image.licenses=Apache-2.0
       -
         name: Build and push bare Docker image
@@ -72,7 +72,7 @@ jobs:
           file: docker/Dockerfile-bare
           platforms: linux/amd64
           push: true
-          provenance: false
+          sbom: true
           tags: |
             ghcr.io/zaproxy/zaproxy:${{ env.REL_DATE_SHORT }}-bare
             ghcr.io/zaproxy/zaproxy:${{ env.REL_VERSION }}-bare
@@ -82,5 +82,5 @@ jobs:
             zaproxy/zap-bare:latest
           annotations: |
             org.opencontainers.image.source=https://github.com/zaproxy/zaproxy
-            org.opencontainers.image.description=The bare Docker image for the world’s most widely used web app scanner.
+            org.opencontainers.image.description=The bare Docker image for the world's most widely used web app scanner.
             org.opencontainers.image.licenses=Apache-2.0
